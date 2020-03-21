@@ -1,0 +1,13 @@
+.custome-1 {
+  margin-top: 30px;
+  padding: 30px;
+  background: hsl(0, 0%, 96%);
+}
+
+.custome-2 {
+  margin-top: 20px;
+}
+
+abbr {
+  text-decoration: none;
+}
