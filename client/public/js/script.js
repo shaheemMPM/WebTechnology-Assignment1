@@ -74,7 +74,7 @@ document.getElementById('btnEdit').addEventListener('click', () => {
 
 document.getElementById('btnToUpper').addEventListener('click', () => {
   let http = new XMLHttpRequest();
-  let url = 'http://localhost:3000/upper';
+  let url = 'https://thawing-retreat-58407.herokuapp.com/upper';
   http.open('POST', url, true);
 
   //Send the proper header information along with the request
@@ -92,7 +92,7 @@ document.getElementById('btnToUpper').addEventListener('click', () => {
 
 document.getElementById('btnToLower').addEventListener('click', () => {
   let http = new XMLHttpRequest();
-  let url = 'http://localhost:3000/lower';
+  let url = 'https://thawing-retreat-58407.herokuapp.com/lower';
   http.open('POST', url, true);
 
   //Send the proper header information along with the request
