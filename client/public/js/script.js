@@ -1,6 +1,6 @@
 let xmlRoot = '<students></students>';
 let parser = new DOMParser();
-var serializer = new XMLSerializer();
+let serializer = new XMLSerializer();
 let xmlDoc = parser.parseFromString(xmlRoot, "text/xml");
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -16,7 +16,7 @@ document.getElementById('btnAdd').addEventListener("click", () => {
   let tempName = document.getElementById('ipName').value;
   let tempAddr = document.getElementById('ipAddress').value;
   if (tempName === "" || tempAddr === "") {
-    var active = document.querySelector(".modal");
+    let active = document.querySelector(".modal");
     active.classList.add("is-active");
   } else {
     let students = xmlDoc.getElementsByTagName("students")[0];
@@ -63,11 +63,47 @@ let render = () => {
 }
 
 document.getElementsByClassName('modal-background')[0].addEventListener('click', () => {
-  var active = document.querySelector(".modal");
+  let active = document.querySelector(".modal");
   active.classList.remove("is-active");
 })
 
 document.getElementById('btnEdit').addEventListener('click', () => {
-  var active = document.querySelector(".modal");
+  let active = document.querySelector(".modal");
   active.classList.remove("is-active");
+})
+
+document.getElementById('btnToUpper').addEventListener('click', () => {
+  let http = new XMLHttpRequest();
+  let url = 'http://localhost:3000/upper';
+  http.open('POST', url, true);
+
+  //Send the proper header information along with the request
+  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+  http.onreadystatechange = function() {//Call a function when the state changes.
+      if(http.readyState == 4 && http.status == 200) {
+          xmlDoc = parser.parseFromString(http.responseText, "text/xml");
+          render();
+      }
+  }
+  let dataToSend = serializer.serializeToString(xmlDoc);
+  http.send(dataToSend);
+})
+
+document.getElementById('btnToLower').addEventListener('click', () => {
+  let http = new XMLHttpRequest();
+  let url = 'http://localhost:3000/lower';
+  http.open('POST', url, true);
+
+  //Send the proper header information along with the request
+  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+  http.onreadystatechange = function() {//Call a function when the state changes.
+      if(http.readyState == 4 && http.status == 200) {
+          xmlDoc = parser.parseFromString(http.responseText, "text/xml");
+          render();
+      }
+  }
+  let dataToSend = serializer.serializeToString(xmlDoc);
+  http.send(dataToSend);
 })
